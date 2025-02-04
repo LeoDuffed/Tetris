@@ -1,2 +1,9 @@
-#include <iostrem> 
-#include <SFML/Graphics.hp>
+
+#include <iostream> 
+#include <SFML/Graphics.hpp>
+using namespace std;
+using namespace sf;
+
+int main(){
+
+}
