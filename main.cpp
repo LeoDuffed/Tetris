@@ -1,15 +1,20 @@
 #include <iostream> 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <variant>
 using namespace std;
 using namespace sf;
 
 int main(){
-    RenderWindow window(VideoMode(400,400),"Tetris");
+    RenderWindow window(VideoMode({400,400}),"Tetris");
     window.setFramerateLimit(60);
     while(window.isOpen()){
-        Event event;
-        while(window.pollEvent(event)){
-            if(event.type==Event::Closed) window.close();
+        std::optional<Event> event;
+        while((event =window.pollEvent())){
+            if(std::holds_alternative<sf::Event::ClosedEvent>(*event)){
+            window.close();
+
+            }
 
         }
         window.clear(Color(20,20,20));
