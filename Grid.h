@@ -23,6 +23,8 @@ class Grid{
     int getNumCols();
     int getCellSize();
 
+    void Inicializar();
+    void Print();
     int grid[20][10];
 
 
