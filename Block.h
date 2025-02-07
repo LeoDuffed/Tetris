@@ -4,6 +4,7 @@
 #include <vector> 
 #include <map> 
 #include "Position.h"
+#include "Colors.h"
 using namespace std;
 
 class Block{
@@ -11,6 +12,7 @@ class Block{
 
     int cellSize;
     int rotationState;
+    vector <Color> colors;
 
     public:
 
@@ -18,7 +20,8 @@ class Block{
     ~Block(){}
     int id;
     map<int, vector<Position>> cells;
-
+    void Draw();
+    
 };
 
 #endif
