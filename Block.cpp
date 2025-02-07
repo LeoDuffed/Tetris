@@ -12,7 +12,7 @@ Block :: Block(){
 
 void Block :: Draw(){
 
-    vector<Position> tiles = cells[rotationState];
+    vector<Position> tiles = GetCellPositions();
     for(Position item: tiles){
         DrawRectangle(item.column * cellSize, item.row * cellSize, cellSize - 1, cellSize - 1, colors[id]);
     }
@@ -25,6 +25,15 @@ void Block:: Move(int rows, int columns){
     columnOffset += columns;
 }
 
-//vector<Position> Block :: GetCellPositions(){
+vector<Position> Block :: GetCellPositions(){
+
+    vector <Position> tiles = cells[rotationState];
+    vector <Position> movedTiles;
+    for(Position item: tiles){
+        Position newPos = Position(item.row + rowOffset, item.column + columnOffset);
+        movedTiles.push_back(newPos);
+    }
+
+    return movedTiles;
      
-//}
+}
