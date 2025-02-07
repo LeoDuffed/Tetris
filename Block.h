@@ -13,6 +13,8 @@ class Block{
     int cellSize;
     int rotationState;
     vector <Color> colors;
+    int rowOffset;
+    int columnOffset;
 
     public:
 
@@ -21,6 +23,8 @@ class Block{
     int id;
     map<int, vector<Position>> cells;
     void Draw();
+    void Move(int rows, int columns);
+    vector <Position> GetCellPositions();
     
 };
 

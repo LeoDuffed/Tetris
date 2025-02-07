@@ -14,7 +14,7 @@ int main(){
     Grid grid = Grid();
     grid.Print();
 
-    ZBlock block = ZBlock();
+    IBlock block = IBlock();
 
     while(WindowShouldClose()==false){
 
