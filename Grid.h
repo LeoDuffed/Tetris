@@ -1,5 +1,8 @@
 #ifndef Grid_H
 #define Grid_H
+#pragma once
+#include <vector>
+#include <raylib.h>
 #include <iostream>
 using namespace std;
 
@@ -9,6 +12,7 @@ class Grid{
     int numRows;
     int numCols;
     int cellSize;
+    
 
 
     public:
