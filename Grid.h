@@ -12,7 +12,8 @@ class Grid{
     int numRows;
     int numCols;
     int cellSize;
-    
+    vector<Color> GetCellColors();
+    vector<Color> colors;
 
 
     public:
@@ -29,6 +30,7 @@ class Grid{
 
     void Inicializar();
     void Print();
+    void Draw();
     int grid[20][10];
 
 
