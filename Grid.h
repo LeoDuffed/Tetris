@@ -12,7 +12,6 @@ class Grid{
     int numRows;
     int numCols;
     int cellSize;
-    vector<Color> GetCellColors();
     vector<Color> colors;
 
 
