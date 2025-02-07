@@ -22,6 +22,7 @@ class Game{
     Block GetRandomBlock();
     vector<Block> GetAllBlocks();
     void Draw();
+    void HandleInput();
 
 };
 
