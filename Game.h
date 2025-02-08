@@ -15,6 +15,7 @@ class Game{
     Block nextBlock;
     bool IsBLockOutside();
     void RotateBlock();
+    void LockBlock();
 
     public: 
 

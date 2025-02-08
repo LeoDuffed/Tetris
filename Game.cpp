@@ -73,6 +73,7 @@ void Game :: MoveBlockRight(){
     currentBlock.Move(0,1);
     if(IsBLockOutside()){
         currentBlock.Move(0,-1);
+
     }
 
 }
@@ -82,6 +83,7 @@ void Game :: MoveBlockDown(){
     currentBlock.Move(1,0);
     if(IsBLockOutside()){
         currentBlock.Move(-1,0);
+        LockBlock();
     }
 
 }
@@ -107,4 +109,14 @@ void Game :: RotateBlock(){
         currentBlock.UnduRotation();
     }
 
+}
+
+void Game :: LockBlock(){
+
+    vector <Position> tiles = currentBlock.GetCellPositions();
+    for(Position item: tiles){
+        grid.grid[item.row][item.column] = currentBlock.id;
+    }
+    currentBlock = nextBlock;
+    nextBlock = GetRandomBlock();
 }
