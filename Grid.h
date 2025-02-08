@@ -28,6 +28,7 @@ class Grid{
     int getCellSize();
 
     bool IsCellOutside(int row, int column);
+    bool IsCellEmpty(int row, int column);
 
     void Inicializar();
     void Print();

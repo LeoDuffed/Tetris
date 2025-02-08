@@ -16,6 +16,7 @@ class Game{
     bool IsBLockOutside();
     void RotateBlock();
     void LockBlock();
+    bool BlockFits();
 
     public: 
 
