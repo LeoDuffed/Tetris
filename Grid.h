@@ -27,6 +27,8 @@ class Grid{
     int getNumCols();
     int getCellSize();
 
+    bool IsCellOutside(int row, int column);
+
     void Inicializar();
     void Print();
     void Draw();

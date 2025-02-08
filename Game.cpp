@@ -1,13 +1,13 @@
 #include "Game.h"
 #include <random>
 
-Game :: Game(){
+Game ::Game()
+{
 
     grid = Grid();
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
-
 }
 
 Block Game :: GetRandomBlock(){
@@ -51,6 +51,10 @@ void Game :: HandleInput(){
         case KEY_DOWN:
         MoveBlockDown();
         break;
+
+        case KEY_UP:
+        RotateBlock();
+        break;
     }
 
 }
@@ -58,14 +62,49 @@ void Game :: HandleInput(){
 void Game :: MoveBlockLeft(){
 
     currentBlock.Move(0,-1);
+    if(IsBLockOutside()){
+        currentBlock.Move(0,1);
+    }
+
 }
 
 void Game :: MoveBlockRight(){
 
     currentBlock.Move(0,1);
+    if(IsBLockOutside()){
+        currentBlock.Move(0,-1);
+    }
+
 }
 
 void Game :: MoveBlockDown(){
 
     currentBlock.Move(1,0);
+    if(IsBLockOutside()){
+        currentBlock.Move(-1,0);
+    }
+
+}
+
+bool Game::IsBLockOutside()
+{
+    vector <Position> tiles = currentBlock.GetCellPositions();
+
+    for(Position item : tiles){
+        if(grid.IsCellOutside(item.row, item.column)){
+            return true;
+        }
+
+    }
+    return false;
+
+}
+
+void Game :: RotateBlock(){
+
+    currentBlock.Rotate();
+    if (IsBLockOutside()){
+        currentBlock.UnduRotation();
+    }
+
 }

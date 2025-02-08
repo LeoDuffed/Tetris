@@ -13,6 +13,8 @@ class Game{
     vector<Block> blocks;
     Block currentBlock;
     Block nextBlock;
+    bool IsBLockOutside();
+    void RotateBlock();
 
     public: 
 
@@ -26,7 +28,7 @@ class Game{
     void MoveBlockLeft();
     void MoveBlockRight();
     void MoveBlockDown();
-    
+
 };
 
 #endif
