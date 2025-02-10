@@ -13,6 +13,9 @@ class Grid{
     int numCols;
     int cellSize;
     vector<Color> colors;
+    bool IsRowFull(int row);
+    void ClearRow(int row);
+    void MoveRowDown(int row, int numRows);
 
 
     public:
@@ -26,6 +29,7 @@ class Grid{
     int getNumRows();
     int getNumCols();
     int getCellSize();
+    int ClearFullRow();
 
     bool IsCellOutside(int row, int column);
     bool IsCellEmpty(int row, int column);

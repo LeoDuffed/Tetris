@@ -120,6 +120,8 @@ void Game :: LockBlock(){
     currentBlock = nextBlock;
     nextBlock = GetRandomBlock();
 
+    grid.ClearFullRow();
+
 }
 
 bool Game :: BlockFits(){
