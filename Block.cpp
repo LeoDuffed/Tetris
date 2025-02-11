@@ -44,6 +44,7 @@ void Block :: Rotate(){
     if(rotationState == (int)cells.size()){
         rotationState = 0;
     }
+    
 }
 
 void Block :: UnduRotation(){
@@ -51,4 +52,5 @@ void Block :: UnduRotation(){
     if(rotationState == -1){
         rotationState = cells.size() - 1;
     }
+
 }
