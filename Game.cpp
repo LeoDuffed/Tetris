@@ -55,6 +55,11 @@ void Game :: HandleInput(){
         case KEY_UP:
         RotateBlock();
         break;
+
+        case KEY_SPACE:
+        PauseGame();
+        break;
+
     }
 
 }
@@ -89,6 +94,11 @@ void Game :: MoveBlockDown(){
         LockBlock();
     }
 
+}
+
+void Game :: PauseGame(){
+
+    // Falta meter el codigo para que se pueda pausar el juego
 }
 
 bool Game::IsBLockOutside()
