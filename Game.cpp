@@ -83,6 +83,9 @@ void Game :: MoveBlockDown(){
     currentBlock.Move(1,0);
     if(IsBLockOutside() || BlockFits() == false){
         currentBlock.Move(-1,0);
+        
+        EventTrigger(0.4);
+
         LockBlock();
     }
 
