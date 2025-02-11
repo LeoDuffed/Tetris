@@ -111,8 +111,22 @@ void Game :: RotateBlock(){
 
 }
 
+bool Game :: EventTrigger(double interval){
+    double lastUpdate = 0;
+
+    double currentTime =GetTime();
+    if(currentTime - lastUpdate >= interval){
+        lastUpdate = currentTime;
+        return true;
+    }
+    return false;
+
+}
+
 void Game :: LockBlock(){
 
+    EventTrigger(0.5);
+    
     vector <Position> tiles = currentBlock.GetCellPositions();
     for(Position item: tiles){
         grid.grid[item.row][item.column] = currentBlock.id;

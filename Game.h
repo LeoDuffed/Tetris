@@ -30,6 +30,7 @@ class Game{
     void MoveBlockLeft();
     void MoveBlockRight();
     void MoveBlockDown();
+    bool EventTrigger(double interval);
 
 };
 
