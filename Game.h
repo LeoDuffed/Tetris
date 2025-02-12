@@ -16,6 +16,7 @@ class Game{
     bool IsBLockOutside();
     void RotateBlock();
     void LockBlock();
+    void Reset();
     bool BlockFits();
 
     public: 
@@ -32,6 +33,8 @@ class Game{
     void MoveBlockDown();
     void PauseGame();
     bool EventTrigger(double interval);
+
+    bool gameOver;
 
 };
 

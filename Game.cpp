@@ -8,6 +8,8 @@ Game ::Game()
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
+    gameOver = false;
+
 }
 
 Block Game :: GetRandomBlock(){
@@ -38,6 +40,13 @@ void Game :: Draw(){
 void Game :: HandleInput(){
 
     int keyPress = GetKeyPressed();
+
+    if(gameOver && keyPress != 0){
+        gameOver = false;
+        Reset();
+
+    }
+
     switch(keyPress){
 
         case KEY_LEFT:
@@ -66,37 +75,45 @@ void Game :: HandleInput(){
 
 void Game :: MoveBlockLeft(){
 
-    currentBlock.Move(0,-1);
-    if(IsBLockOutside() || BlockFits() == false){
-        currentBlock.Move(0,1);
+    if(!gameOver){
+        currentBlock.Move(0,-1);
+        if(IsBLockOutside() || BlockFits() == false){
+            currentBlock.Move(0,1);
+        }
     }
 
 }
 
 void Game :: MoveBlockRight(){
 
-    currentBlock.Move(0,1);
-    if(IsBLockOutside() || BlockFits() == false){
-        currentBlock.Move(0,-1);
+    if(!gameOver){
+        currentBlock.Move(0,1);
+        if(IsBLockOutside() || BlockFits() == false){
+            currentBlock.Move(0,-1);
 
+        }
     }
 
 }
 
 void Game :: MoveBlockDown(){
 
-    currentBlock.Move(1,0);
-    if(IsBLockOutside() || BlockFits() == false){
-        currentBlock.Move(-1,0);
-        
-        EventTrigger(0.4);
+    if(!gameOver){
+        currentBlock.Move(1,0);
+        if(IsBLockOutside() || BlockFits() == false){
+            currentBlock.Move(-1,0);
+            
+            EventTrigger(0.4);
 
-        LockBlock();
+            LockBlock();
+        }
     }
 
 }
 
 void Game :: PauseGame(){
+
+    cout << "Falta poner boton de pausa";
 
     // Falta meter el codigo para que se pueda pausar el juego
 }
@@ -117,9 +134,11 @@ bool Game::IsBLockOutside()
 
 void Game :: RotateBlock(){
 
-    currentBlock.Rotate();
-    if (IsBLockOutside() || BlockFits() == false){
-        currentBlock.UnduRotation();
+    if(!gameOver){
+        currentBlock.Rotate();
+        if (IsBLockOutside() || BlockFits() == false){
+            currentBlock.UnduRotation();
+        }
     }
 
 }
@@ -145,6 +164,12 @@ void Game :: LockBlock(){
         grid.grid[item.row][item.column] = currentBlock.id;
     }
     currentBlock = nextBlock;
+
+    if(BlockFits() == false){
+
+        gameOver = true;
+
+    }
     nextBlock = GetRandomBlock();
 
     grid.ClearFullRow();
@@ -159,4 +184,13 @@ bool Game :: BlockFits(){
         }
     }
     return true;
+}
+
+void Game :: Reset(){
+    
+    grid.Inicializar();
+    blocks = GetAllBlocks();
+    currentBlock = GetRandomBlock();
+    nextBlock = GetRandomBlock();
+
 }
