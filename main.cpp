@@ -54,7 +54,10 @@ int main(){
         char scoreText[10];
         snprintf(scoreText, sizeof(scoreText), "%d", game.score); 
         Vector2 textSize = MeasureTextEx(font, scoreText, 38, 2); 
-        DrawTextEx(font, scoreText, {310 + (170 - textSize.x) / 2, 225}, 38, 2, WHITE);
+
+        float textPosX = 300 + (170 - textSize.x) / 2;
+
+        DrawTextEx(font, scoreText, {textPosX, 225}, 38, 2, WHITE);
         
 
         game.Draw();
