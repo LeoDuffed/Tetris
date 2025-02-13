@@ -219,6 +219,22 @@ void Game :: UpdateScore(int linesCleared, int moveDownPoints){
         score+=500;
         break;
 
+        case 4:
+        score+= 700;
+        break;
+
+        case 5:
+        score+= 800;
+        break;
+
+        case 6:
+        score+=800;
+        break;
+
+        case 7:
+        score+=800;
+        break;
+
         default:
         break;
     }
