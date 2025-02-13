@@ -17,7 +17,7 @@ bool EventTriggered(double interval){
 int main(){
 
     Color darkBlue = {44,44,127,255};
-    InitWindow(300,600, "raylib Tetris");
+    InitWindow(500,620, "raylib Tetris");
     SetTargetFPS(60);
 
     Game game = Game();
