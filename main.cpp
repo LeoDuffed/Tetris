@@ -20,7 +20,7 @@ int main(){
     InitWindow(500,620, "raylib Tetris");
     SetTargetFPS(60);
 
-    Font font = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
+    Font font = LoadFontEx("fon/SUPREME_.TTF", 64, 0, 0);
 
     Game game = Game();
 
