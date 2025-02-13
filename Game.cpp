@@ -174,6 +174,7 @@ void Game :: LockBlock(){
     if(BlockFits() == false){
 
         gameOver = true;
+        CheckHighScore();
 
     }
     nextBlock = GetRandomBlock();
@@ -241,4 +242,50 @@ void Game :: UpdateScore(int linesCleared, int moveDownPoints){
 
     score += moveDownPoints;
    
+}
+
+void Game :: LoadHighScores(){
+    highScores.clear();
+    ifstream file("highscores.txt");
+    string name;
+    int score;
+    
+    while(file >> name >> score){
+        highScores.push_back({score, name});
+    }
+
+    file.close();
+    sort(highScores.rbegin(), highScores.rend());
+    if(highScores.size() > 3){
+        highScores.resize(3);
+    }
+
+}
+
+void Game :: SaveHighScores(){
+    ofstream file("highscores.txt");
+
+    for(const auto& entry : highScores){
+        file << entry.second << " " << entry.first << endl;
+    }
+
+    file.close();
+
+}
+
+void Game :: CheckHighScore(){
+    if(score > (highScores.size() < 3 ? 0 : highScores.back().first)){
+        cout << "New High Score!\nEnter your name: ";
+        string playerName;
+        cin >> playerName;
+        highScores.push_back({score, playerName});
+        sort(highScores.rbegin(), highScores.rend());
+
+        if(highScores.size() > 3){
+            highScores.resize(3);
+        }
+
+        SaveHighScores();
+    }
+
 }

@@ -4,6 +4,8 @@
 #include "Grid.h"
 #include "Blocks.cpp"
 #include <vector>
+#include <fstream> 
+#include <algorithm>
 #pragma once
 using namespace std;
 
@@ -11,6 +13,7 @@ class Game{
     private:
 
     vector<Block> blocks;
+    vector<pair<int, string>> highScores;
     Block currentBlock;
     Block nextBlock;
     bool IsBLockOutside();
@@ -18,6 +21,8 @@ class Game{
     void LockBlock();
     void Reset(); 
     void UpdateScore(int linesCleared, int moveDownPoints);
+    void SaveHighScores();
+    void CheckHighScore();
     bool BlockFits();
 
     public: 
@@ -36,6 +41,7 @@ class Game{
     void MoveBlockRight();
     void MoveBlockDown();
     void PauseGame();
+    void LoadHighScores();
     bool EventTrigger(double interval);
 
 };
