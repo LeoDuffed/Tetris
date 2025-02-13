@@ -51,7 +51,8 @@ int main(){
         }
 
         if(game.isPaused){
-            DrawTextEx(font, "En Pausa", {30, 430}, 40, 2, WHITE);
+            DrawRectangleRounded({315, 430,182,80},0.3,6,lightBlue);
+            DrawTextEx(font, "En Pausa", {320, 450}, 40, 2, WHITE);
         }
 
         DrawRectangleRounded({320,210,170,60},0.3,6,lightBlue);
