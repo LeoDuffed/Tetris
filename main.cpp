@@ -43,16 +43,24 @@ int main(){
         DrawTextEx(font, "S", {455, 40}, 38, 2, PURPLE);
 
         DrawTextEx(font, "Score", {350, 165}, 38, 2, WHITE);
+
         if(game.gameOver){
             DrawTextEx(font, "GAME", {350, 430}, 40, 2, WHITE);
             DrawTextEx(font, "OVER", {350, 470}, 40, 2, WHITE);
 
-
         }
+
         DrawRectangleRounded({320,210,170,60},0.3,6,lightBlue);
+        char scoreText[10];
+        snprintf(scoreText, sizeof(scoreText), "%d", game.score); 
+        Vector2 textSize = MeasureTextEx(font, scoreText, 38, 2); 
+        DrawTextEx(font, scoreText, {310 + (170 - textSize.x) / 2, 225}, 38, 2, WHITE);
+        
+
         game.Draw();
         EndDrawing();
     }
 
     CloseWindow();
+    
 }

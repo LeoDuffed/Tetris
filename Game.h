@@ -16,7 +16,8 @@ class Game{
     bool IsBLockOutside();
     void RotateBlock();
     void LockBlock();
-    void Reset();
+    void Reset(); 
+    void UpdateScore(int linesCleared, int moveDownPoints);
     bool BlockFits();
 
     public: 
@@ -24,6 +25,8 @@ class Game{
     Game();
     ~Game(){}
     Grid grid;
+    bool gameOver;
+    int score;
     Block GetRandomBlock();
     vector<Block> GetAllBlocks();
     void Draw();
@@ -33,8 +36,6 @@ class Game{
     void MoveBlockDown();
     void PauseGame();
     bool EventTrigger(double interval);
-
-    bool gameOver;
 
 };
 

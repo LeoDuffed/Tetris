@@ -9,6 +9,7 @@ Game ::Game()
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
     gameOver = false;
+    score = 0;
 
 }
 
@@ -59,6 +60,7 @@ void Game :: HandleInput(){
 
         case KEY_DOWN:
         MoveBlockDown();
+        UpdateScore(0,1);
         break;
 
         case KEY_UP:
@@ -172,7 +174,8 @@ void Game :: LockBlock(){
     }
     nextBlock = GetRandomBlock();
 
-    grid.ClearFullRow();
+    int rowsCleared = grid.ClearFullRow();
+    UpdateScore(rowsCleared, 0);
 
 }
 
@@ -192,5 +195,30 @@ void Game :: Reset(){
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
+    score = 0;
 
+}
+
+void Game :: UpdateScore(int linesCleared, int moveDownPoints){
+
+    switch (linesCleared){
+
+        case 1: 
+        score += 100;
+        break;
+
+        case 2: 
+        score+=200;
+        break;
+
+        case 3:
+        score+=500;
+        break;
+
+        default:
+        break;
+    }
+
+    score += moveDownPoints;
+   
 }
