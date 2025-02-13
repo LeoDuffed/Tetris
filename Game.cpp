@@ -3,7 +3,8 @@
 
 Game ::Game()
 {
-
+    
+    srand(time(NULL));
     grid = Grid();
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();

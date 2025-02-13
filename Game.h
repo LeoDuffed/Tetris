@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream> 
 #include <algorithm>
+#include <ctime>
 #pragma once
 using namespace std;
 
