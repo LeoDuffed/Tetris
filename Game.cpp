@@ -10,6 +10,7 @@ Game ::Game()
     nextBlock = GetRandomBlock();
     gameOver = false;
     score = 0;
+    isPaused = false;
 
 }
 
@@ -41,11 +42,19 @@ void Game :: Draw(){
 void Game :: HandleInput(){
 
     int keyPress = GetKeyPressed();
+    
+    if(keyPress == KEY_SPACE){
+        PauseGame();
+    }
 
     if(gameOver && keyPress != 0){
         gameOver = false;
         Reset();
 
+    }
+
+    if(isPaused || gameOver){
+        return;
     }
 
     switch(keyPress){
@@ -65,10 +74,6 @@ void Game :: HandleInput(){
 
         case KEY_UP:
         RotateBlock();
-        break;
-
-        case KEY_SPACE:
-        PauseGame();
         break;
 
     }
@@ -115,9 +120,8 @@ void Game :: MoveBlockDown(){
 
 void Game :: PauseGame(){
 
-    cout << "Falta poner boton de pausa";
+    isPaused = !isPaused;
 
-    // Falta meter el codigo para que se pueda pausar el juego
 }
 
 bool Game::IsBLockOutside()

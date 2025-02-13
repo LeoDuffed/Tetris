@@ -26,6 +26,7 @@ class Game{
     ~Game(){}
     Grid grid;
     bool gameOver;
+    bool isPaused;
     int score;
     Block GetRandomBlock();
     vector<Block> GetAllBlocks();

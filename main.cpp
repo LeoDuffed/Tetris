@@ -28,7 +28,7 @@ int main(){
 
         game.HandleInput();
 
-        if(EventTriggered(0.3)){
+        if(!game.isPaused && EventTriggered(0.3)){
             game.MoveBlockDown();
         }
 
