@@ -21,8 +21,6 @@ class Game{
     void LockBlock();
     void Reset(); 
     void UpdateScore(int linesCleared, int moveDownPoints);
-    void SaveHighScores();
-    void CheckHighScore();
     bool BlockFits();
 
     public: 
@@ -35,6 +33,7 @@ class Game{
     int score;
     Block GetRandomBlock();
     vector<Block> GetAllBlocks();
+    vector<pair<int, string>>getHighScores();
     void Draw();
     void HandleInput();
     void MoveBlockLeft();
@@ -42,6 +41,8 @@ class Game{
     void MoveBlockDown();
     void PauseGame();
     void LoadHighScores();
+    void CheckHighScore();
+    void SaveHighScores();
     bool EventTrigger(double interval);
 
 };

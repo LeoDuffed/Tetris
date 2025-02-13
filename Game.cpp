@@ -244,6 +244,10 @@ void Game :: UpdateScore(int linesCleared, int moveDownPoints){
    
 }
 
+vector<pair<int, string>> Game :: getHighScores(){
+    return highScores;
+}
+
 void Game :: LoadHighScores(){
     highScores.clear();
     ifstream file("highscores.txt");

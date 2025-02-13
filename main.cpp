@@ -32,17 +32,11 @@ int main(){
 
         if(!game.isPaused && EventTriggered(0.3)){
             game.MoveBlockDown();
+
         }
 
         BeginDrawing();
-        ClearBackground(darkBlue);
-
-        DrawTextEx(font, "Top Scores:", {320, 300}, 28, 2, WHITE);
-        for (int i = 0; i < highScores.size(); i++) {
-            char scoreEntry[50];
-            snprintf(scoreEntry, sizeof(scoreEntry), "%d. %s: %d", i + 1, highScores[i].second.c_str(), highScores[i].first);
-            DrawTextEx(font, scoreEntry, {320, 330 + i * 30}, 24, 2, WHITE);
-        }
+        ClearBackground(darkBlue);     
 
         DrawTextEx(font, "T", {323, 40}, 38, 2, RED);
         DrawTextEx(font, "E", {353, 40}, 38, 2, ORANGE);
@@ -73,6 +67,14 @@ int main(){
         float textPosX = 300 + (170 - textSize.x) / 2;
 
         DrawTextEx(font, scoreText, {textPosX, 225}, 38, 2, WHITE);
+
+        vector<pair<int, string>> scores = game.getHighScores();
+        for (int i = 0; i < scores.size(); i++) {
+            char scoreEntry[50];
+            snprintf(scoreEntry, sizeof(scoreEntry), "%d. %s: %d", i + 1, scores[i].second.c_str(), scores[i].first);
+            DrawTextEx(font, scoreEntry, (Vector2){350.0f, static_cast<float>(330 + i * 30)}, 24, 2, WHITE);
+        }
+         
 
         game.Draw();
         EndDrawing();
