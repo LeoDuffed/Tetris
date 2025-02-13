@@ -17,10 +17,10 @@ bool EventTriggered(double interval){
 
 int main(){
 
-    InitWindow(500,620, "raylib Tetris");
+    InitWindow(500,620, "r/aylib Tetris");
     SetTargetFPS(60);
 
-    Font font = LoadFontEx("fon/SUPREME_.TTF", 64, 0, 0);
+    Font font = LoadFontEx("Curved Square.ttf", 64, 0, 0);
 
     Game game = Game();
 
