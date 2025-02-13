@@ -45,14 +45,15 @@ int main(){
         DrawTextEx(font, "Score", {350, 165}, 38, 2, WHITE);
 
         if(game.gameOver){
-            DrawTextEx(font, "GAME", {350, 430}, 40, 2, WHITE);
-            DrawTextEx(font, "OVER", {350, 470}, 40, 2, WHITE);
+            DrawRectangleRounded({315,510,182,100},0.3,6,lightBlue);
+            DrawTextEx(font, "GAME", {360, 525}, 40, 2, WHITE);
+            DrawTextEx(font, "OVER", {360, 565}, 40, 2, WHITE);
 
         }
 
         if(game.isPaused){
-            DrawRectangleRounded({315, 430,182,80},0.3,6,lightBlue);
-            DrawTextEx(font, "En Pausa", {320, 450}, 40, 2, WHITE);
+            DrawRectangleRounded({315, 530,182,80},0.3,6,lightBlue);
+            DrawTextEx(font, "En Pausa", {320, 550}, 40, 2, WHITE);
         }
 
         DrawRectangleRounded({320,210,170,60},0.3,6,lightBlue);
