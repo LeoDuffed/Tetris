@@ -280,7 +280,7 @@ void Game :: SaveHighScores(){
 
 void Game :: CheckHighScore(){
     if(score > (highScores.size() < 3 ? 0 : highScores.back().first)){
-        cout << "New High Score!\nEnter your name: ";
+        cout << "Nuevo Record!\n6 letras max\nEnter your name: ";
         string playerName;
         cin >> playerName;
         highScores.push_back({score, playerName});

@@ -74,7 +74,7 @@ int main(){
         for (int i = 0; i < scores.size(); i++) {
             char scoreEntry[50];
             snprintf(scoreEntry, sizeof(scoreEntry), "%d. %s: %d", i + 1, scores[i].second.c_str(), scores[i].first);
-            DrawTextEx(font, scoreEntry, (Vector2){340.0f, static_cast<float>(350 + i * 30)}, 24, 2, WHITE);
+            DrawTextEx(font, scoreEntry, (Vector2){320.0f, static_cast<float>(340 + i * 30)}, 24, 2, WHITE);
         }         
 
         game.Draw();
