@@ -59,7 +59,8 @@ int main(){
 
         if(!game.isPaused && !game.gameOver){
             DrawRectangleRounded({315,410,182,180},0.3,6,lightBlue);
-            DrawTextEx(font, "Next", {360, 420}, 40,2, WHITE);
+            DrawTextEx(font, "Next", {360, 425}, 40,2, WHITE);
+            game.DrawNextBlock();
         }
 
         DrawTextEx(font, "SCORE", {345, 110}, 38, 2, WHITE);

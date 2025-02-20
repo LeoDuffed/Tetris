@@ -22,7 +22,7 @@ class Block{
     ~Block(){}
     int id;
     map<int, vector<Position>> cells;
-    void Draw();
+    void Draw(int offsetX, int offsetY );
     void Move(int rows, int columns);
     vector <Position> GetCellPositions();
     void Rotate();
