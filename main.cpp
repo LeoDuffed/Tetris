@@ -46,19 +46,20 @@ int main(){
         DrawTextEx(font, "S", {455, 40}, 38, 2, PURPLE);
 
         if(game.gameOver){
-            DrawRectangleRounded({315,480,182,100},0.3,6,lightBlue);
-            DrawTextEx(font, "GAME", {350, 495}, 40, 2, WHITE);
-            DrawTextEx(font, "OVER", {350, 535}, 40, 2, WHITE);
+            DrawRectangleRounded({315,440,182,100},0.3,6,lightBlue);
+            DrawTextEx(font, "GAME", {350, 455}, 40, 2, WHITE);
+            DrawTextEx(font, "OVER", {350, 495}, 40, 2, WHITE);
 
         }
 
         if(game.isPaused){
-            DrawRectangleRounded({315, 500,182,80},0.3,6,lightBlue);
-            DrawTextEx(font, "En Pausa", {320, 520}, 40, 2, WHITE);
+            DrawRectangleRounded({315, 450,182,80},0.3,6,lightBlue);
+            DrawTextEx(font, "En Pausa", {320, 470}, 40, 2, WHITE);
         }
 
         if(!game.isPaused && !game.gameOver){
             DrawRectangleRounded({315,410,182,180},0.3,6,lightBlue);
+            DrawTextEx(font, "Next", {360, 420}, 40,2, WHITE);
         }
 
         DrawTextEx(font, "SCORE", {345, 110}, 38, 2, WHITE);
