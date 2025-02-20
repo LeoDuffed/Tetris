@@ -57,6 +57,11 @@ int main(){
             DrawTextEx(font, "En Pausa", {320, 520}, 40, 2, WHITE);
         }
 
+        if(!game.isPaused && !game.gameOver){
+            // Mover para arriba
+            DrawRectangleRounded({315,450,182,180},0.3,6,lightBlue);
+        }
+
         DrawTextEx(font, "Score", {350, 130}, 38, 2, WHITE);
 
         DrawRectangleRounded({320,175,170,60},0.3,6,lightBlue);
@@ -68,6 +73,7 @@ int main(){
 
         DrawTextEx(font, scoreText, {textPosX, 190}, 38, 2, WHITE);
 
+        //Mover para arriba
         DrawTextEx(font, "Top",{380, 300},28,2, WHITE);
 
         vector<pair<int, string>> scores = game.getHighScores();
