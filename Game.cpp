@@ -41,7 +41,7 @@ void Game :: Draw(){
 }
 
 void Game :: DrawNextBlock(){
-    nextBlock.Draw(270,490);
+    nextBlock.Draw(265,500);
 }
 
 void Game :: HandleInput(){

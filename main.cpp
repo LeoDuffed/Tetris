@@ -53,12 +53,12 @@ int main(){
         }
 
         if(game.isPaused){
-            DrawRectangleRounded({315, 450,182,80},0.3,6,lightBlue);
-            DrawTextEx(font, "En Pausa", {320, 470}, 40, 2, WHITE);
+            DrawRectangleRounded({320, 450,172,80},0.3,6,lightBlue);
+            DrawTextEx(font, "Pausa", {350, 470}, 40, 2, WHITE);
         }
 
         if(!game.isPaused && !game.gameOver){
-            DrawRectangleRounded({315,410,182,180},0.3,6,lightBlue);
+            DrawRectangleRounded({320,410,172,180},0.3,6,lightBlue);
             DrawTextEx(font, "Next", {360, 425}, 40,2, WHITE);
             game.DrawNextBlock();
         }
