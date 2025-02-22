@@ -134,7 +134,7 @@ int Grid :: ClearFullRow(){
 }
 
 void Grid :: AnimatedLineClear(int row){
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < 4; i++){
         for(int column = 0; column < numCols; column++){
             grid[row][column] = (i % 2 == 0) ? 0 : 7;
 
@@ -143,7 +143,7 @@ void Grid :: AnimatedLineClear(int row){
         Draw();
         EndDrawing();
         BeginDrawing();
-        WaitTime(0.05);
+        WaitTime(0.03);
 
     }
 
