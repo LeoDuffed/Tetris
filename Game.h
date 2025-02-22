@@ -36,6 +36,7 @@ class Game{
     vector<Block> GetAllBlocks();
     vector<pair<int, string>>getHighScores();
     void Draw();
+    void DrawGostPiece();
     void DrawNextBlock();
     void HandleInput();
     void MoveBlockLeft();

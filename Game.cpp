@@ -298,3 +298,19 @@ void Game :: CheckHighScore(){
     }
 
 }
+
+void Game :: DrawGostPiece(){
+
+    Block ghostBlock = currentBlock;
+
+    while(!IsBLockOutside() && BlockFits()){
+        ghostBlock.Move(1,0);
+    }
+
+    ghostBlock.Move(-1, 0);
+
+    vector<Position> ghostTiles = ghostBlock.GetCellPositions();
+    for(Position item : ghostTiles){
+        DrawRectangle(item.column * grid.getCellSize()+11, item.row * grid.getCellSize()+11, grid.getCellSize()-1, grid.getCellSize()-1, Fade(GRAY, 0.5f));
+    }
+}
