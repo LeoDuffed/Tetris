@@ -23,6 +23,7 @@ class Game{
     void Reset(); 
     void UpdateScore(int linesCleared, int moveDownPoints);
     bool BlockFits();
+    double lastUpdate;
 
     public: 
 
@@ -36,7 +37,7 @@ class Game{
     vector<Block> GetAllBlocks();
     vector<pair<int, string>>getHighScores();
     void Draw();
-    void DrawGostPiece();
+    void DrawGhostPiece();
     void DrawNextBlock();
     void HandleInput();
     void MoveBlockLeft();

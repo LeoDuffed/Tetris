@@ -12,6 +12,7 @@ Game ::Game()
     gameOver = false;
     score = 0;
     isPaused = false;
+    lastUpdate = 0;
 
 }
 
@@ -36,6 +37,7 @@ vector <Block> Game::GetAllBlocks(){
 void Game :: Draw(){
 
     grid.Draw();
+    //DrawGhostPiece();
     currentBlock.Draw(11,11);
 
 }
@@ -155,9 +157,9 @@ void Game :: RotateBlock(){
 }
 
 bool Game :: EventTrigger(double interval){
-    double lastUpdate = 0;
 
     double currentTime =GetTime();
+
     if(currentTime - lastUpdate >= interval){
         lastUpdate = currentTime;
         return true;
@@ -299,12 +301,16 @@ void Game :: CheckHighScore(){
 
 }
 
-void Game :: DrawGostPiece(){
+void Game :: DrawGhostPiece(){
 
     Block ghostBlock = currentBlock;
 
+    int maxMoves = grid.getNumRows();
+    int moves = 0;
+
     while(!IsBLockOutside() && BlockFits()){
         ghostBlock.Move(1,0);
+        moves++;
     }
 
     ghostBlock.Move(-1, 0);
