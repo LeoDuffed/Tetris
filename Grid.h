@@ -37,6 +37,7 @@ class Grid{
     void Inicializar();
     void Print();
     void Draw();
+    void AnimatedLineClear(int row);
     int grid[20][10];
 
 

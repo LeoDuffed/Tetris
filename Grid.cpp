@@ -120,6 +120,7 @@ int Grid :: ClearFullRow(){
 
     for(int row = numRows-1; row >= 0; row--){
         if(IsRowFull(row)){
+            AnimatedLineClear(row);
             ClearRow(row);
             completed++;
 
@@ -130,4 +131,20 @@ int Grid :: ClearFullRow(){
     }
 
     return completed;
+}
+
+void Grid :: AnimatedLineClear(int row){
+    for(int i = 0; i < 5; i++){
+        for(int column = 0; column < numCols; column++){
+            grid[row][column] = (i % 2 == 0) ? 0 : 7;
+
+        }
+
+        Draw();
+        EndDrawing();
+        BeginDrawing();
+        WaitTime(0.05);
+
+    }
+
 }
