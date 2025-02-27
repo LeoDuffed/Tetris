@@ -13,6 +13,8 @@ Game ::Game()
     score = 0;
     isPaused = false;
     lastUpdate = 0;
+    lastDownMoveTime = 0;
+    downMoveDelay = 0.1;
 
 }
 
@@ -64,6 +66,16 @@ void Game :: HandleInput(){
         return;
     } 
 
+    if(IsKeyDown(KEY_DOWN)){
+        double currentTime = GetTime();
+        if (currentTime  - lastDownMoveTime >= downMoveDelay){
+            MoveBlockDown();
+            UpdateScore(0,1);
+            lastDownMoveTime = currentTime;
+        }
+
+    }
+    
     switch(keyPress){
 
         case KEY_LEFT:
@@ -76,13 +88,6 @@ void Game :: HandleInput(){
 
         case KEY_UP:
         RotateBlock();
-        break;
-
-        case KEY_DOWN:
-        if(IsKeyDown(KEY_DOWN)){
-            MoveBlockDown();
-            UpdateScore(0,1);
-        }
         break;
 
     }

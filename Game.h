@@ -24,6 +24,8 @@ class Game{
     void UpdateScore(int linesCleared, int moveDownPoints);
     bool BlockFits();
     double lastUpdate;
+    double lastDownMoveTime;
+    double downMoveDelay;
 
     public: 
 
