@@ -62,7 +62,7 @@ void Game :: HandleInput(){
 
     if(isPaused || gameOver){
         return;
-    }
+    } 
 
     switch(keyPress){
 
@@ -74,13 +74,15 @@ void Game :: HandleInput(){
         MoveBlockRight();
         break;
 
-        case KEY_DOWN:
-        MoveBlockDown();
-        UpdateScore(0,1);
-        break;
-
         case KEY_UP:
         RotateBlock();
+        break;
+
+        case KEY_DOWN:
+        if(IsKeyDown(KEY_DOWN)){
+            MoveBlockDown();
+            UpdateScore(0,1);
+        }
         break;
 
     }
