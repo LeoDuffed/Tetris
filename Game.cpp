@@ -14,7 +14,7 @@ Game ::Game()
     isPaused = false;
     lastUpdate = 0;
     lastDownMoveTime = 0;
-    downMoveDelay = 0.1;
+    downMoveDelay = 0.2;
 
 }
 
