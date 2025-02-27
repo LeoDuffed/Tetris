@@ -165,7 +165,7 @@ void Game :: RotateBlock(){
 
 bool Game :: EventTrigger(double interval){
 
-    double currentTime =GetTime();
+    double currentTime = GetTime();
 
     if(currentTime - lastUpdate >= interval){
         lastUpdate = currentTime;
