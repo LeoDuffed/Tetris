@@ -39,7 +39,7 @@ vector <Block> Game::GetAllBlocks(){
 void Game :: Draw(){
 
     grid.Draw();
-    //DrawGhostPiece();
+    DrawGhostPiece();
     currentBlock.Draw(11,11);
 
 }
@@ -315,15 +315,18 @@ void Game :: DrawGhostPiece(){
     int maxMoves = grid.getNumRows();
     int moves = 0;
 
-    while(!IsBLockOutside() && BlockFits()){
+    while(moves < maxMoves){
         ghostBlock.Move(1,0);
+        if(IsBLockOutside() || !BlockFits()){
+            ghostBlock.Move(-1, 0);
+            break;
+        }
         moves++;
     }
 
-    ghostBlock.Move(-1, 0);
-
     vector<Position> ghostTiles = ghostBlock.GetCellPositions();
     for(Position item : ghostTiles){
-        DrawRectangle(item.column * grid.getCellSize()+11, item.row * grid.getCellSize()+11, grid.getCellSize()-1, grid.getCellSize()-1, Fade(GRAY, 0.5f));
+        DrawRectangle(item.column * grid.getCellSize() + 11,item.row * grid.getCellSize() + 11, grid.getCellSize() - 1, grid.getCellSize() - 1, Fade(WHITE, 0.3f));
+
     }
 }
