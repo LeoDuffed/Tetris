@@ -14,7 +14,7 @@ Game ::Game()
     isPaused = false;
     lastUpdate = 0;
     lastDownMoveTime = 0;
-    downMoveDelay = 0.2;
+    downMoveDelay = 0.15;
 
 }
 
@@ -311,22 +311,38 @@ void Game :: CheckHighScore(){
 void Game :: DrawGhostPiece(){
 
     Block ghostBlock = currentBlock;
-
-    int maxMoves = grid.getNumRows();
     int moves = 0;
 
-    while(moves < maxMoves){
+    while(true){
         ghostBlock.Move(1,0);
-        if(IsBLockOutside() || !BlockFits()){
+
+        bool collinsion = false;
+
+        for(const Position& pos : ghostBlock.GetCellPositions()){
+
+            if(grid.IsCellOutside(pos.row, pos.column) || !grid.IsCellEmpty(pos.row, pos.column)){
+                collinsion = true;
+                break;
+            }
+        }
+
+        if(collinsion){
             ghostBlock.Move(-1, 0);
             break;
         }
+
         moves++;
+
+        if (moves >= grid.getNumRows()){
+            break;
+        }
+
     }
 
     vector<Position> ghostTiles = ghostBlock.GetCellPositions();
     for(Position item : ghostTiles){
-        DrawRectangle(item.column * grid.getCellSize() + 11,item.row * grid.getCellSize() + 11, grid.getCellSize() - 1, grid.getCellSize() - 1, Fade(WHITE, 0.3f));
+        DrawRectangle(item.column * grid.getCellSize() + 11,item.row * grid.getCellSize() + 11, grid.getCellSize() - 1, grid.getCellSize() - 1, Fade(WHITE, 0.2f));
 
     }
+
 }
