@@ -133,21 +133,6 @@ void Game :: MoveBlockDown(){
 
 }
 
-void Game :: SpeedBLockDown(){
-
-    if(!gameOver){
-        currentBlock.Move(1,0);
-        if(IsBLockOutside() || BlockFits() == false){
-            currentBlock.Move(-1,0);
-
-            EventTrigger(0.4);
-
-            LockBlock();
-
-        }
-    }
-}
-
 void Game :: PauseGame(){
 
     isPaused = !isPaused;

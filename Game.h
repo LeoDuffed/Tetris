@@ -46,7 +46,6 @@ class Game{
     void MoveBlockLeft();
     void MoveBlockRight();
     void MoveBlockDown();
-    void SpeedBLockDown();
     void PauseGame();
     void LoadHighScores();
     void CheckHighScore();
