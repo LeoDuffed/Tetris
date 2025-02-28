@@ -35,6 +35,7 @@ class Game{
     bool gameOver;
     bool isPaused;
     int score;
+    double dropInterval;
     Block GetRandomBlock();
     vector<Block> GetAllBlocks();
     vector<pair<int, string>>getHighScores();
@@ -45,6 +46,7 @@ class Game{
     void MoveBlockLeft();
     void MoveBlockRight();
     void MoveBlockDown();
+    void SpeedBLockDown();
     void PauseGame();
     void LoadHighScores();
     void CheckHighScore();

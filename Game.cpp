@@ -15,6 +15,7 @@ Game ::Game()
     lastUpdate = 0;
     lastDownMoveTime = 0;
     downMoveDelay = 0.2;
+    dropInterval = 0;
 
 }
 
@@ -130,6 +131,21 @@ void Game :: MoveBlockDown(){
         }
     }
 
+}
+
+void Game :: SpeedBLockDown(){
+
+    if(!gameOver){
+        currentBlock.Move(1,0);
+        if(IsBLockOutside() || BlockFits() == false){
+            currentBlock.Move(-1,0);
+
+            EventTrigger(0.4);
+
+            LockBlock();
+
+        }
+    }
 }
 
 void Game :: PauseGame(){

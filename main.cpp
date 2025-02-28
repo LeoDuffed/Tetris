@@ -29,11 +29,62 @@ int main(){
         game.LoadHighScores();
 
         game.HandleInput();
+        /*
 
-        if(!game.isPaused && EventTriggered(0.3)){
-            game.MoveBlockDown();
-
+        while(!game.isPaused && !game.gameOver){
+            if(game.score <= 10 && EventTriggered(0.3)){
+                game.MoveBlockDown();
+            } else if(game.score > 10 && EventTriggered(0.1)){
+                game.MoveBlockDown();
+                
+            }
         }
+            */
+
+        /*
+        if(!game.isPaused && EventTriggered(0.3) && game.score >= -1 && game.score <=10){
+            game.SpeedBLockDown();
+            cout << "Se esta moviendo 1" << endl;
+
+        } else{
+            continue;
+        }
+        
+        if(!game.isPaused && EventTriggered(0.2) && game.score > 10 && game.score <20){
+            game.SpeedBLockDown();
+            cout << "Se esta moviendo 2" << endl;
+
+        } else {
+            continue;
+        } 
+
+        if(!game.isPaused && EventTriggered(0.1) && game.score >20 && game.score < 30){
+            game.SpeedBLockDown();
+            cout << "Se esta moviendo 3" << endl;
+        } else {
+            continue;
+        }
+            */
+
+        if (game.score <= 10) {
+            game.dropInterval = 0.3;
+            cout << "Se esta moviendo 1" << endl;
+        } else if (game.score > 10 && game.score <= 20) {
+            game.dropInterval = 0.2;
+            cout << "Se esta moviendo 2" << endl;
+        } else if (game.score > 20 && game.score <= 30) {
+            game.dropInterval = 0.1;
+            cout << "Se esta moviendo 3" << endl;
+        } else {
+            game.dropInterval = 0.08;
+            cout << "Se esta moviendo 4" << endl;  // Puede seguir reduciéndose a medida que avanza el juego
+        }
+            
+        if (!game.isPaused && EventTriggered(game.dropInterval)) {
+            game.MoveBlockDown();
+        }
+            
+            
 
         BeginDrawing();
         ClearBackground(darkBlue);     
