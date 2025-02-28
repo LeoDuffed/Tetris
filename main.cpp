@@ -37,9 +37,9 @@ int main(){
         } else if (game.score > 4000 && game.score <= 8000) {
             game.dropInterval = 0.2;
         } else if(game.score > 8000 && game.score <= 12000){
-            game.dropInterval = 1.8;
+            game.dropInterval = 0.8;
         } else {
-            game.dropInterval = 1.5;
+            game.dropInterval = 0.5;
         }
             
         if (!game.isPaused && EventTriggered(game.dropInterval)) {
