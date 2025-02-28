@@ -29,63 +29,23 @@ int main(){
         game.LoadHighScores();
 
         game.HandleInput();
-        /*
 
-        while(!game.isPaused && !game.gameOver){
-            if(game.score <= 10 && EventTriggered(0.3)){
-                game.MoveBlockDown();
-            } else if(game.score > 10 && EventTriggered(0.1)){
-                game.MoveBlockDown();
-                
-            }
-        }
-            */
-
-        /*
-        if(!game.isPaused && EventTriggered(0.3) && game.score >= -1 && game.score <=10){
-            game.SpeedBLockDown();
-            cout << "Se esta moviendo 1" << endl;
-
-        } else{
-            continue;
-        }
-        
-        if(!game.isPaused && EventTriggered(0.2) && game.score > 10 && game.score <20){
-            game.SpeedBLockDown();
-            cout << "Se esta moviendo 2" << endl;
-
-        } else {
-            continue;
-        } 
-
-        if(!game.isPaused && EventTriggered(0.1) && game.score >20 && game.score < 30){
-            game.SpeedBLockDown();
-            cout << "Se esta moviendo 3" << endl;
-        } else {
-            continue;
-        }
-            */
-
-        if (game.score <= 10) {
+        if (game.score <= 2000) {
             game.dropInterval = 0.3;
-            cout << "Se esta moviendo 1" << endl;
-        } else if (game.score > 10 && game.score <= 20) {
+        } else if (game.score > 2000 && game.score <= 4000) {
+            game.dropInterval = 0.25;
+        } else if (game.score > 4000 && game.score <= 8000) {
             game.dropInterval = 0.2;
-            cout << "Se esta moviendo 2" << endl;
-        } else if (game.score > 20 && game.score <= 30) {
-            game.dropInterval = 0.1;
-            cout << "Se esta moviendo 3" << endl;
+        } else if(game.score > 8000 && game.score <= 12000){
+            game.dropInterval = 1.8;
         } else {
-            game.dropInterval = 0.08;
-            cout << "Se esta moviendo 4" << endl;  // Puede seguir reduciéndose a medida que avanza el juego
+            game.dropInterval = 1.5;
         }
             
         if (!game.isPaused && EventTriggered(game.dropInterval)) {
             game.MoveBlockDown();
         }
             
-            
-
         BeginDrawing();
         ClearBackground(darkBlue);     
 
