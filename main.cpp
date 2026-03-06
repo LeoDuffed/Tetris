@@ -30,6 +30,7 @@ int main(){
 
         game.HandleInput();
 
+        // velocidad de las figuras dependiendo del puntaje
         if (game.score <= 2000) {
             game.dropInterval = 0.3;
         } else if (game.score > 2000 && game.score <= 4000) {
