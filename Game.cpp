@@ -219,6 +219,7 @@ void Game :: Reset(){
 
 }
 
+// Game scores
 void Game :: UpdateScore(int linesCleared, int moveDownPoints){
 
     switch (linesCleared){
