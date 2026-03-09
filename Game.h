@@ -21,7 +21,6 @@ class Game{
     Block currentBlock;
     Block nextBlock;
     bool IsBLockOutside();
-    void RotateBlock();
     void LockBlock();
     void Reset(); 
     void UpdateScore(int linesCleared, int moveDownPoints);
@@ -56,6 +55,7 @@ class Game{
     void MoveBlockLeft();
     void MoveBlockRight();
     void MoveBlockDown();
+    void RotateBlock();
     void PauseGame();
     void LoadHighScores();
     void CheckHighScore();

@@ -15,6 +15,7 @@ public:
     bool connectPort(const std::string& portName, int baudRate = 9600);
     void disconnectPort();
     bool isConnected() const;
+    int readByte();
 
     bool sendData(const std::string& data);
 };

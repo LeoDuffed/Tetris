@@ -39,6 +39,22 @@ int main(){
     game.LoadHighScores();
 
     while(WindowShouldClose()==false){
+        int serialByte = serial.readByte();
+
+        if(serialByte != -1){
+
+            if(serialByte == 0x69){ // i
+                game.MoveBlockLeft();
+            }
+
+            if(serialByte == 0x64){ // d
+                game.MoveBlockRight();
+            }
+
+            if(serialByte == 0x72){ // r
+                game.RotateBlock();
+            }
+        }
 
         game.HandleInput();
 

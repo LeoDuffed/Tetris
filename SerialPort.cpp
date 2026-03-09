@@ -95,3 +95,20 @@ bool SerialPort::sendData(const std::string& data) {
     ssize_t bytesWritten = write(serialFd, data.c_str(), data.length());
     return (bytesWritten == (ssize_t)data.length());
 }
+
+int SerialPort::readByte() {
+
+    if (!connected || serialFd < 0) {
+        return -1;
+    }
+
+    unsigned char byte;
+
+    ssize_t n = read(serialFd, &byte, 1);
+
+    if (n > 0) {
+        return byte;
+    }
+
+    return -1;
+}
