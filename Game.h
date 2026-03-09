@@ -33,6 +33,7 @@ class Game{
     SerialPort* serialPort;
     void SendNextBlockSerial();
     void SendPauseSerial();
+    void SendScoreSerial();
 
     public: 
 

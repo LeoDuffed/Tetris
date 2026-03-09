@@ -379,29 +379,20 @@ void Game::SetSerialPort(SerialPort* port) {
 }
 
 void Game::SendNextBlockSerial() {
-    cout << "Entró a SendNextBlockSerial" << endl;
 
-    if (serialPort == nullptr) {
-        cout << "serialPort es nullptr" << endl;
+    if (serialPort == nullptr || !serialPort->isConnected()) {
         return;
     }
 
-    if (!serialPort->isConnected()) {
-        cout << "serialPort no está conectado" << endl;
-        return;
-    }
+    string msg = "F";
+    msg += BoolIdToAsciiDigit(nextBlock.boolId);
 
-    cout << "nextBlock.boolId = " << nextBlock.boolId << endl;
-
-    string data = BoolIdToAsciiDigit(nextBlock.boolId);
-    cout << "Enviando a Arduino/FPGA: " << data << endl;
-
-    bool ok = serialPort->sendData(data);
+    bool ok = serialPort->sendData(msg);
 
     if (ok) {
-        cout << "Dato enviado correctamente" << endl;
+        cout << "Figura enviada: F" << BoolIdToAsciiDigit(nextBlock.boolId) << endl;
     } else {
-        cout << "Fallo al enviar dato" << endl;
+        cout << "Error al enviar figura" << endl;
     }
 }
 
@@ -409,4 +400,18 @@ void Game::SendPauseSerial() {
     if (serialPort != nullptr && serialPort->isConnected()) {
         serialPort->sendData("7");
     }
+}
+
+void Game::SendScoreSerial(){
+    
+    if(serialPort == nullptr || !serialPort->isConnected()){
+        return;
+    }
+
+    unsigned short score16 = static_cast<unsigned short>(score);
+
+    char high = static_cast<char>((score16 >> 8) & 0xFF);
+    char low = static_cast<char>(score16 & 0xFF);
+
+    // falta completar
 }
