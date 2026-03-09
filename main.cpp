@@ -19,7 +19,7 @@ bool EventTriggered(double interval){
 
 int main(){
 
-    InitWindow(500,620, "Tetris");
+    InitWindow(500,620, "Tarris");
     SetTargetFPS(60);
 
     Font font = LoadFontEx("/smonogram.ttf", 64, 0, 0);
@@ -51,16 +51,23 @@ int main(){
                 game.MoveBlockRight();
             }
 
-            if(serialByte == 0x72){ // r
+            if(serialByte == 0x72){ 
                 game.RotateBlock();
+            }
+
+            if(serialByte == 0x80){ 
+                game.MoveBlockDown();
             }
         }
 
         game.HandleInput();
 
         // velocidad de las figuras dependiendo del puntaje
-        if (game.score <= 2000) {
-            game.dropInterval = 1;
+        
+        if (game.score <= 5) {
+            game.dropInterval = 0.20;
+        } else if (game.score >= 10){
+            game.dropInterval = 0.15;
         }
             
         if (!game.isPaused && EventTriggered(game.dropInterval)) {
@@ -71,8 +78,8 @@ int main(){
         ClearBackground(darkBlue);     
 
         DrawTextEx(font, "T", {323, 40}, 38, 2, RED);
-        DrawTextEx(font, "E", {353, 40}, 38, 2, ORANGE);
-        DrawTextEx(font, "T", {380, 40}, 38, 2, YELLOW);
+        DrawTextEx(font, "A", {353, 40}, 38, 2, ORANGE);
+        DrawTextEx(font, "R", {380, 40}, 38, 2, YELLOW);
         DrawTextEx(font, "R", {410, 40}, 38, 2, GREEN);
         DrawTextEx(font, "I", {440, 40}, 38, 2, cyan);
         DrawTextEx(font, "S", {455, 40}, 38, 2, PURPLE);
@@ -89,11 +96,13 @@ int main(){
             DrawTextEx(font, "Pausa", {350, 470}, 40, 2, WHITE);
         }
 
+        /* 
         if(!game.isPaused && !game.gameOver){
             DrawRectangleRounded({320,410,172,180},0.3,6,lightBlue);
             DrawTextEx(font, "Next", {360, 425}, 40,2, WHITE);
             game.DrawNextBlock();
         }
+        */
 
         DrawTextEx(font, "SCORE", {345, 110}, 38, 2, WHITE);
 
