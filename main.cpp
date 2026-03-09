@@ -1,7 +1,9 @@
 #include <raylib.h>
 #include <iostream> 
+#include <unistd.h>
 #include "Game.h"
 #include "Colors.h"
+#include "SerialPort.h"
 using namespace std;
 
 double lastUpdateTime = 0;
@@ -22,7 +24,18 @@ int main(){
 
     Font font = LoadFontEx("/smonogram.ttf", 64, 0, 0);
 
+    // Para comunicacion serial
+    SerialPort serial;
+    bool serialOk = serial.connectPort("/dev/cu.usbmodemB43A453518882", 9600);
+    if(serialOk){
+        cout<<"conectado al puerto"<<endl;
+        usleep(2000000); // 2 segundos
+    } else {
+        cout<<"no conectado al puerto"<<endl;
+    }
+
     Game game = Game();
+    game.SetSerialPort(&serial);
 
     while(WindowShouldClose()==false){
 
@@ -32,15 +45,7 @@ int main(){
 
         // velocidad de las figuras dependiendo del puntaje
         if (game.score <= 2000) {
-            game.dropInterval = 0.3;
-        } else if (game.score > 2000 && game.score <= 4000) {
             game.dropInterval = 0.25;
-        } else if (game.score > 4000 && game.score <= 8000) {
-            game.dropInterval = 0.2;
-        } else if(game.score > 8000 && game.score <= 12000){
-            game.dropInterval = 0.18;
-        } else {
-            game.dropInterval = 0.15;
         }
             
         if (!game.isPaused && EventTriggered(game.dropInterval)) {

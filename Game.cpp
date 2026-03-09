@@ -17,6 +17,9 @@ Game ::Game()
     downMoveDelay = 0.2;
     dropInterval = 0;
 
+    // Comunicacion serial
+    serialPort = nullptr;
+
 }
 
 Block Game :: GetRandomBlock(){
@@ -60,7 +63,6 @@ void Game :: HandleInput(){
     if(gameOver && keyPress != 0){
         gameOver = false;
         Reset();
-
     }
 
     if(isPaused || gameOver){
@@ -71,7 +73,6 @@ void Game :: HandleInput(){
         double currentTime = GetTime();
         if (currentTime  - lastDownMoveTime >= downMoveDelay){
             MoveBlockDown();
-            UpdateScore(0,1);
             lastDownMoveTime = currentTime;
         }
 
@@ -137,6 +138,12 @@ void Game :: PauseGame(){
 
     isPaused = !isPaused;
 
+    if (isPaused){
+        SendPauseSerial();
+    } else {
+        SendNextBlockSerial();
+    }
+
 }
 
 bool Game::IsBLockOutside()
@@ -189,10 +196,12 @@ void Game :: LockBlock(){
     if(BlockFits() == false){
 
         gameOver = true;
+        SendPauseSerial();
         CheckHighScore();
 
     }
     nextBlock = GetRandomBlock();
+    SendNextBlockSerial();
 
     int rowsCleared = grid.ClearFullRow();
     UpdateScore(rowsCleared, 0);
@@ -216,7 +225,8 @@ void Game :: Reset(){
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
     score = 0;
-
+    isPaused = false;
+    SendNextBlockSerial();
 }
 
 void Game :: UpdateScore(int linesCleared, int moveDownPoints){
@@ -224,31 +234,31 @@ void Game :: UpdateScore(int linesCleared, int moveDownPoints){
     switch (linesCleared){
 
         case 1: 
-        score += 100;
+        score += 1;
         break;
 
         case 2: 
-        score+=200;
+        score+=2;
         break;
 
         case 3:
-        score+=500;
+        score+=3;
         break;
 
         case 4:
-        score+= 700;
+        score+= 4;
         break;
 
         case 5:
-        score+= 800;
+        score+= 5;
         break;
 
         case 6:
-        score+=800;
+        score+= 6;
         break;
 
         case 7:
-        score+=800;
+        score+= 7;
         break;
 
         default:
@@ -346,4 +356,57 @@ void Game :: DrawGhostPiece(){
 
     }
 
+}
+
+// Comunicacion serial
+
+string Game::BoolIdToAsciiDigit(const string& bits) {
+
+    if(bits == "000") return "0";
+    if(bits == "001") return "1";
+    if(bits == "010") return "2";
+    if(bits == "011") return "3";
+    if(bits == "100") return "4";
+    if(bits == "101") return "5";
+    if(bits == "110") return "6";
+
+    return "7"; // pausa o error
+}
+
+void Game::SetSerialPort(SerialPort* port) {
+    serialPort = port;
+    SendNextBlockSerial();
+}
+
+void Game::SendNextBlockSerial() {
+    cout << "Entró a SendNextBlockSerial" << endl;
+
+    if (serialPort == nullptr) {
+        cout << "serialPort es nullptr" << endl;
+        return;
+    }
+
+    if (!serialPort->isConnected()) {
+        cout << "serialPort no está conectado" << endl;
+        return;
+    }
+
+    cout << "nextBlock.boolId = " << nextBlock.boolId << endl;
+
+    string data = BoolIdToAsciiDigit(nextBlock.boolId);
+    cout << "Enviando a Arduino/FPGA: " << data << endl;
+
+    bool ok = serialPort->sendData(data);
+
+    if (ok) {
+        cout << "Dato enviado correctamente" << endl;
+    } else {
+        cout << "Fallo al enviar dato" << endl;
+    }
+}
+
+void Game::SendPauseSerial() {
+    if (serialPort != nullptr && serialPort->isConnected()) {
+        serialPort->sendData("7");
+    }
 }

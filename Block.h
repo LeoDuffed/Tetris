@@ -21,6 +21,7 @@ class Block{
     Block();
     ~Block(){}
     int id;
+    string boolId;
     map<int, vector<Position>> cells;
     void Draw(int offsetX, int offsetY );
     void Move(int rows, int columns);

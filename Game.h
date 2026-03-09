@@ -3,6 +3,7 @@
 #include <iostream> 
 #include "Grid.h"
 #include "Blocks.cpp"
+#include "SerialPort.h"
 #include <vector>
 #include <fstream> 
 #include <algorithm>
@@ -26,6 +27,12 @@ class Game{
     double lastUpdate;
     double lastDownMoveTime;
     double downMoveDelay;
+    
+    // comunicacion serial
+    string BoolIdToAsciiDigit(const string& bits);
+    SerialPort* serialPort;
+    void SendNextBlockSerial();
+    void SendPauseSerial();
 
     public: 
 
@@ -52,6 +59,8 @@ class Game{
     void SaveHighScores();
     bool EventTrigger(double interval);
 
+    // Comunicacion serial:
+    void SetSerialPort(SerialPort* port);
 };
 
 #endif
