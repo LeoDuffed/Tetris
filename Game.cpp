@@ -142,6 +142,7 @@ void Game :: PauseGame(){
         SendPauseSerial();
     } else {
         SendNextBlockSerial();
+        SendScoreSerial();
     }
 
 }
@@ -198,6 +199,7 @@ void Game :: LockBlock(){
         gameOver = true;
         SendPauseSerial();
         CheckHighScore();
+        return;
 
     }
     nextBlock = GetRandomBlock();
@@ -226,10 +228,14 @@ void Game :: Reset(){
     nextBlock = GetRandomBlock();
     score = 0;
     isPaused = false;
+
     SendNextBlockSerial();
+    SendScoreSerial();
 }
 
 void Game :: UpdateScore(int linesCleared, int moveDownPoints){
+
+    int oldScore = score;
 
     switch (linesCleared){
 
@@ -266,6 +272,10 @@ void Game :: UpdateScore(int linesCleared, int moveDownPoints){
     }
 
     score += moveDownPoints;
+
+    if(score != oldScore){
+        SendScoreSerial();
+    }
    
 }
 
@@ -360,22 +370,23 @@ void Game :: DrawGhostPiece(){
 
 // Comunicacion serial
 
-string Game::BoolIdToAsciiDigit(const string& bits) {
+uint8_t Game::BoolIdToCode(const string& bits) {
 
-    if(bits == "000") return "0";
-    if(bits == "001") return "1";
-    if(bits == "010") return "2";
-    if(bits == "011") return "3";
-    if(bits == "100") return "4";
-    if(bits == "101") return "5";
-    if(bits == "110") return "6";
+    if(bits == "000") return 0;
+    if(bits == "001") return 1;
+    if(bits == "010") return 2;
+    if(bits == "011") return 3;
+    if(bits == "100") return 4;
+    if(bits == "101") return 5;
+    if(bits == "110") return 6;
 
-    return "7"; // pausa o error
+    return 7; // pausa o error
 }
 
 void Game::SetSerialPort(SerialPort* port) {
     serialPort = port;
     SendNextBlockSerial();
+    SendScoreSerial();
 }
 
 void Game::SendNextBlockSerial() {
@@ -384,22 +395,28 @@ void Game::SendNextBlockSerial() {
         return;
     }
 
-    string msg = "F";
-    msg += BoolIdToAsciiDigit(nextBlock.boolId);
+    uint8_t blockCode = BoolIdToCode(nextBlock.boolId);
+    uint8_t byteToSend =  blockCode;
+
+    string msg;
+    msg += static_cast<char>(byteToSend);
 
     bool ok = serialPort->sendData(msg);
 
-    if (ok) {
-        cout << "Figura enviada: F" << BoolIdToAsciiDigit(nextBlock.boolId) << endl;
-    } else {
-        cout << "Error al enviar figura" << endl;
-    }
+    if(!ok) cout<<"Error al enviar figura"<<endl;
+
 }
 
 void Game::SendPauseSerial() {
-    if (serialPort != nullptr && serialPort->isConnected()) {
-        serialPort->sendData("7");
+    if (serialPort == nullptr || !serialPort->isConnected()) {
+        return;
     }
+    
+    uint8_t byteToSend = 0x07;
+    string msg;
+    msg += static_cast<char>(byteToSend);
+    serialPort->sendData(msg);
+
 }
 
 void Game::SendScoreSerial(){
@@ -408,10 +425,19 @@ void Game::SendScoreSerial(){
         return;
     }
 
-    unsigned short score16 = static_cast<unsigned short>(score);
+    uint8_t score7 = static_cast<uint8_t>(min(score, 127));
+    uint8_t byteToSend = 0x80 | score7;
 
-    char high = static_cast<char>((score16 >> 8) & 0xFF);
-    char low = static_cast<char>(score16 & 0xFF);
+    string msg;
+    msg += static_cast<char>(byteToSend);
 
-    // falta completar
+    bool ok = serialPort->sendData(msg);
+
+    cout << "Score actual = " << score
+     << " | score7 = " << static_cast<int>(score7)
+     << " | byte enviado = " << static_cast<int>(byteToSend)
+     << endl;
+
+    if(!ok) cout<<"Error al enviar score"<<endl;
+
 }

@@ -7,6 +7,8 @@
 #include <vector>
 #include <fstream> 
 #include <algorithm>
+#include <cstdint>
+#include <algorithm>
 #include <ctime>
 #pragma once
 using namespace std;
@@ -29,7 +31,7 @@ class Game{
     double downMoveDelay;
     
     // comunicacion serial
-    string BoolIdToAsciiDigit(const string& bits);
+    uint8_t BoolIdToCode(const string& bits);
     SerialPort* serialPort;
     void SendNextBlockSerial();
     void SendPauseSerial();

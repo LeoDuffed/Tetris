@@ -36,10 +36,9 @@ int main(){
 
     Game game = Game();
     game.SetSerialPort(&serial);
+    game.LoadHighScores();
 
     while(WindowShouldClose()==false){
-
-        game.LoadHighScores();
 
         game.HandleInput();
 
