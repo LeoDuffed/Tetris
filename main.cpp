@@ -60,7 +60,7 @@ int main(){
 
         // velocidad de las figuras dependiendo del puntaje
         if (game.score <= 2000) {
-            game.dropInterval = 0.25;
+            game.dropInterval = 1;
         }
             
         if (!game.isPaused && EventTriggered(game.dropInterval)) {
