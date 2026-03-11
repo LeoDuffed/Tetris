@@ -96,5 +96,4 @@ g++ -std=c++17 -o tetris main.cpp Game.cpp Grid.cpp Block.cpp Blocks.cpp Colors.
 
 ## 👨‍💻 Autor
 
-Leonardo (con ayuda de ChatGPT 😊)  
-
+Leonardo 
