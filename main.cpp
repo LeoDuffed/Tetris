@@ -54,10 +54,6 @@ int main(){
             if(serialByte == 0x72){ 
                 game.RotateBlock();
             }
-
-            if(serialByte == 0x80){ 
-                game.MoveBlockDown();
-            }
         }
 
         game.HandleInput();
